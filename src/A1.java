@@ -20,6 +20,7 @@ class A1 {
         tile(n, L, b);
 
 
+
         for(int i = 0; i<n; i++){
             for(int y = n-1; y>=0; y--){
                 if(board[y][i])System.out.print("X|");
