@@ -1,14 +1,15 @@
+import java.awt.*;
 import java.util.ArrayList;
 
 class Tromino_tiling {
 
     static int[][] board = new int[0][0];
-    static ArrayList<tromino> trominos = new ArrayList<tromino>();
+    public static ArrayList<tromino> trominos = new ArrayList<tromino>();
 
     public static void main(String[] args){
 
-        int n = 4;
-        location L = new location(0, 3);
+        int n = 8;
+        location L = new location(1, 2);
         location b = new location(0, 0);
         tile(n, L, b);
 
@@ -17,6 +18,16 @@ class Tromino_tiling {
         for (tromino x : trominos){
             System.out.println(x);
         }
+
+        Frame frame = new Frame();
+        frame.add(new paint());
+        int frameWidth = 1000;
+        int frameHeight = 1000;
+        frame.setSize(frameWidth, frameHeight);
+        frame.setVisible(true);
+
+
+
 
     }
 
@@ -58,12 +69,16 @@ class Tromino_tiling {
 
         //BL
         if(temp!="UR") tile(n/2, new location(n/2-1, n/2-1), new location(0, 0));
+        else tile(n/2, L, new location(0, 0));
         //BR
-        if(temp!="UL") tile(n/2, new location(n/2-1, n/2-2), new location(n/2, 0));
+        if(temp!="UL") tile(n/2, new location(n/2-2, n/2-1), new location(n/2, 0));
+        else tile(n/2, L, new location(n/2, 0));
         //TL
-        if(temp!="LR") tile(n/2, new location(n/2-2, n/2-1), new location(0, n/2));
+        if(temp!="LR") tile(n/2, new location(n/2-1, n/2-2), new location(0, n/2));
+        else tile(n/2, L, new location(0, n/2));
         //TR
         if(temp!="LL") tile(n/2, new location(n/2-2, n/2-2), new location(n/2, n/2));
+        else tile(n/2, L, new location(n/2, n/2));
 
     }
 
