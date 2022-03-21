@@ -8,18 +8,21 @@ class A1 {
 
         System.out.println("Please give size of board and co-ordanates of the missing square");
         int n=8;
-        location L = new location(0,7);
+        location L = new location(0,0);
 
         location b = new location(0,0);
         board = new boolean[n][n];
         board[L.getX()][L.getY()]=true;
+
+        board[0][1]=true;
+        board[7][0]=true;
 
         tile(n, L, b);
 
 
         for(int i = 0; i<n; i++){
             for(int y = n-1; y>=0; y--){
-                if(board[i][y])System.out.print("X|");
+                if(board[y][i])System.out.print("X|");
                 else System.out.print(" |");
 
             }
@@ -36,6 +39,7 @@ class A1 {
 
         for(int i = 0; i<8; i++){
             System.out.print("|");
+            //for(int y = 0; y<8; y++){
             for(int y = 8-1; y>=0; y--){
                 if(board[i][y])System.out.print("X|");
                 else System.out.print(" |");
@@ -62,27 +66,27 @@ class A1 {
 
         //Right
         if (L.getX() + b.getX() > (n / 2)) {
-            //Top
+            //Bot
             if (L.getY() + b.getY() > (n / 2)) {
-                System.out.println("TR");
+                System.out.println("BR");
                 board[(n / 2 - 1)+b.getX()][(n / 2 - 1)+b.getY()] = true;
                 board[(n / 2)+b.getX()][(n / 2 - 1)+b.getY()] = true;
                 board[(n / 2 - 1)+b.getX()][(n / 2)+b.getY()] = true;
 
-                //TR
+                //BR
                 tile(n/2, L, new location(n/2,n/2));
 
-                //BL
-                tile(n/2, new location(n/2-1, n/2-1), b);
-                //BR
-                tile(n/2, new location(n/2, n/2-1), new location(n/2,0));
                 //TL
+                tile(n/2, new location(n/2-1, n/2-1), b);
+                //TR
+                tile(n/2, new location(n/2, n/2-1), new location(n/2,0));
+                //BL
                 tile(n/2, new location(n/2-1, n/2), new location(0,n/2));
 
             }
-            //Bot
+            //Top
             else {
-                System.out.println("BR");
+                System.out.println("TR");
                 board[(n / 2)+b.getX()][(n / 2)+b.getY()] = true;
                 board[(n / 2 - 1)+b.getX()][(n / 2)+b.getY()] = true;
                 board[(n / 2 - 1)+b.getX()][(n / 2 - 1)+b.getY()] = true;
@@ -99,10 +103,9 @@ class A1 {
             }
         }   //Left
             else{
-                //Top
+                //Bot
                 if (L.getY() + b.getY() > (n / 2)) {
-                    System.out.println("TL");
-
+                    System.out.println("BL");
                     board[(n / 2)+b.getX()][(n / 2)+b.getY()] = true;
                     board[(n / 2 - 1)+b.getX()][(n / 2 - 1)+b.getY()] = true;
                     board[(n / 2)+b.getX()][(n / 2 - 1)+b.getY()] = true;
@@ -117,9 +120,9 @@ class A1 {
                     //BL
                     tile(n/2, new location(n/2, n/2), new location(n/2,n/2));
                 }
-                //Bot
+                //Top
                 else {
-                    System.out.println("BL");
+                    System.out.println("TL");
                     board[(n / 2 - 1)+b.getX()][(n / 2)+b.getY()] = true;
                     board[(n / 2)+b.getX()][(n / 2 - 1)+b.getY()] = true;
                     board[(n / 2)+b.getX()][(n / 2)+b.getY()] = true;
